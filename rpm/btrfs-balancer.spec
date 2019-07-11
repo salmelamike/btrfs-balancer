@@ -28,12 +28,14 @@ make %{?jobs:-j%jobs}
 %install
 rm -rf %{buildroot}
 %qmake5_install
+# Move under /usr
+mv %{buildroot}/lib %{buildroot}%{_libdir}
 
 %files
 %defattr(-,root,root,-)
 /etc/dbus-1/system.d/*
 /usr/share/dbus-1/system-services/*
-/lib/systemd/system/*
+%{_libdir}/systemd/system/*
 %{_sbindir}/*
 
 %package config-example
